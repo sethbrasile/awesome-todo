@@ -20,13 +20,4 @@
   </div>
 </template>
 
-<script>
-  import Task from './Task.vue';
-  export default {
-    props: ['tasks', 'headerText', 'bgColor'],
-
-    components: {
-      Task
-    }
-  }
-</script>
+<script src="./TaskList.js">
