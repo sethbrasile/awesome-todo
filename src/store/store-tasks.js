@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { uid } from 'quasar';
 
 const state = {
+  search: '',
   tasks: {
     'ID1': {
       name: 'Go to shop',
@@ -33,6 +34,9 @@ const mutations = {
   },
   addTask(state, payload) {
     Vue.set(state.tasks, payload.id, payload.task);
+  },
+  setSearch(state, value) {
+    state.search = value.toLowerCase();
   }
 }
 
@@ -49,15 +53,40 @@ const actions = {
     let id = uid();
     let payload = { id, task };
     commit('addTask', payload);
+  },
+
+  setSearch({ commit }, value) {
+    commit('setSearch', value);
   }
 }
 
 const getters = {
-  tasksTodo(state) {
+  tasksFiltered(state) {
+    let tasks = {};
+    let search = state.search;
+
+    if (search) {
+      Object.keys(state.tasks).map((key) => {
+        let task = state.tasks[key];
+        let name = task.name.toLowerCase();
+
+        if (name.includes(search)) {
+          tasks[key] = task;
+        }
+      });
+
+      return tasks;
+    }
+
+    return state.tasks;
+  },
+
+  tasksTodo(state, getters) {
+    let tasksFiltered = getters.tasksFiltered;
     let tasks = {};
 
-    Object.keys(state.tasks).map((key) => {
-      let task = state.tasks[key];
+    Object.keys(tasksFiltered).map((key) => {
+      let task = tasksFiltered[key];
 
       if (!task.completed) {
         tasks[key] = task;
@@ -67,11 +96,12 @@ const getters = {
     return tasks;
   },
 
-  tasksCompleted(state) {
+  tasksCompleted(state, getters) {
+    let tasksFiltered = getters.tasksFiltered;
     let tasks = {};
 
-    Object.keys(state.tasks).map((key) => {
-      let task = state.tasks[key];
+    Object.keys(tasksFiltered).map((key) => {
+      let task = tasksFiltered[key];
 
       if (task.completed) {
         tasks[key] = task;

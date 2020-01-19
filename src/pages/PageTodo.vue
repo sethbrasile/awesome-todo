@@ -1,10 +1,22 @@
 <template>
   <q-page class="q-pa-md">
-    <q-banner v-if="!has(tasksTodo)" class="bg-grey-3 q-mb-lg">
+
+    <div class="row q-mb-lg">
+      <Search />
+    </div>
+
+    <q-banner v-if="!has(tasksTodo) && search" class="bg-grey-3 q-mb-lg">
+      <template v-slot:avatar>
+        <q-icon name="close" color="negative" />
+      </template>
+      No Results!
+    </q-banner>
+
+    <q-banner v-if="!has(tasksTodo) && !search" class="bg-grey-3 q-mb-lg">
       <template v-slot:avatar>
         <q-icon name="check" color="primary" />
       </template>
-      You have nothing to do!
+      You have nothing to do! Go watch some TV!
       <template v-slot:action>
         <q-btn
           @click="showAddTask = !showAddTask"
