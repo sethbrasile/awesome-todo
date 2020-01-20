@@ -6,4 +6,8 @@ export default {
   setTasksOneList(state, value) {
     state.settings.tasksOneList = value;
   },
+
+  setSettings(state, settings) {
+    Object.assign(state.settings, settings);
+  }
 }
