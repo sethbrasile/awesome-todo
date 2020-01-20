@@ -1,4 +1,5 @@
 import { mapState, mapActions } from 'vuex';
+import { openURL } from 'quasar';
 
 export default {
   computed: {
@@ -24,6 +25,14 @@ export default {
   },
 
   methods: {
-    ...mapActions('settings', ['setTwelveHourTime', 'setTasksOneList'])
+    ...mapActions('settings', ['setTwelveHourTime', 'setTasksOneList']),
+
+    visitOurWebsite() {
+      openURL('http://www.yahoo.com');
+    },
+
+    emailUs() {
+      window.location.href = 'mailto:hello@awesometodo.com?subject=Awesome Todo Feedback';
+    }
   }
 }
