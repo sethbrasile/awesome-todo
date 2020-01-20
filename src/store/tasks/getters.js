@@ -1,11 +1,33 @@
+function getaThing(state, prop) {
+  return state.tasks[prop][state.sort].toLowerCase();
+}
+
 export default {
-  tasksFiltered(state) {
+  tasksSorted(state) {
     let tasks = {};
+
+    let keysOrdered = Object.keys(state.tasks).sort((a, b) => {
+      let aProp = getaThing(state, a);
+      let bProp = getaThing(state, b);
+
+      if (aProp > bProp) return 1
+      else if (aProp < bProp) return -1
+      else return 0
+    });
+
+    keysOrdered.map((key) => tasks[key] = state.tasks[key]);
+
+    return tasks;
+  },
+
+  tasksFiltered(state, getters) {
+    let tasks = {};
+    let tasksSorted = getters.tasksSorted;
     let search = state.search;
 
     if (search) {
-      Object.keys(state.tasks).map((key) => {
-        let task = state.tasks[key];
+      Object.keys(tasksSorted).map((key) => {
+        let task = tasksSorted[key];
         let name = task.name.toLowerCase();
 
         if (name.includes(search)) {
@@ -16,7 +38,7 @@ export default {
       return tasks;
     }
 
-    return state.tasks;
+    return tasksSorted;
   },
 
   tasksTodo(state, getters) {
