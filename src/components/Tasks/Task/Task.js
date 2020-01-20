@@ -1,4 +1,4 @@
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import { date } from 'quasar';
 import EditTask from 'components/Tasks/Modals/EditTask/EditTask.vue'
 
@@ -31,6 +31,8 @@ export default {
     }
   },
   computed: {
+    ...mapState('tasks', ['search']),
+
     isCompleted: {
       get() {
         return this.task.completed;
@@ -38,11 +40,22 @@ export default {
       set() {
         this.toggleCompleted();
       }
-    }
+    },
+
   },
   filters: {
     niceDate(value) {
       return formatDate(value, 'MMM D');
+    },
+    searchHighlight(value, search) {
+      if (search) {
+        let regex = new RegExp(search, 'ig');
+        return value.replace(regex, (match) => {
+          return `<span class="bg-yellow-6">${match}</span>`;
+        });
+      }
+
+      return value;
     }
   },
   components: {
