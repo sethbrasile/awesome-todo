@@ -80,4 +80,4 @@
   </q-page>
 </template>
 
-<script src="./PageSettings.js" />
+<script src="./Settings.js" />

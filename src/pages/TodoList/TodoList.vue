@@ -71,7 +71,7 @@
   </q-page>
 </template>
 
-<script src="./PageTodo.js" />
+<script src="./TodoList.js" />
 
 <style lang="stylus">
   .text-strikethrough

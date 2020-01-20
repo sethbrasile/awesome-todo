@@ -6,15 +6,15 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('pages/PageTodo.vue')
+        component: () => import('pages/TodoList/TodoList.vue')
       },
       {
       path: '/settings',
-      component: () => import('pages/PageSettings.vue')
+      component: () => import('pages/Settings/Settings.vue')
       },
       {
         path: '/settings/help',
-        component: () => import('pages/PageHelp.vue')
+        component: () => import('pages/Settings/Help.vue')
       }
     ]
   }
