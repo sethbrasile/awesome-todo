@@ -4,9 +4,9 @@
     :options="options"
     class="col q-ml-sm"
     label="Sort by"
+    outlined
     emit-value
     map-options
-    filled
     stack-label
   />
 </template>
