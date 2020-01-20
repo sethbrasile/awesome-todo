@@ -32,6 +32,7 @@ export default {
   },
   computed: {
     ...mapState('tasks', ['search']),
+    ...mapState('settings', ['settings']),
 
     isCompleted: {
       get() {
@@ -42,6 +43,15 @@ export default {
       }
     },
 
+    dueTime() {
+      let { dueDate, dueTime } = this.task;
+
+      if (this.settings.twelveHourTime) {
+        return formatDate(`${dueDate} ${dueTime}`, 'h:mm a')
+      }
+
+      return dueTime;
+    }
   },
   filters: {
     niceDate(value) {

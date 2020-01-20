@@ -13,10 +13,7 @@
     <q-item-section>
       <q-item-label
         :class="{'text-strikethrough' : task.completed}"
-        v-html="$options.filters.searchHighlight(task.name, search)"
-      >
-
-      </q-item-label>
+        v-html="$options.filters.searchHighlight(task.name, search)" />
     </q-item-section>
 
     <q-item-section side>
@@ -42,7 +39,7 @@
             class="row justify-end"
             caption
           >
-            <small>{{task.dueTime}}</small>
+            <small>{{dueTime}}</small>
           </q-item-label>
         </div>
       </div>
