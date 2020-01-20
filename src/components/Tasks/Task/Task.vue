@@ -76,4 +76,4 @@
   </q-item>
 </template>
 
-<script src="./Task.js">
+<script src="./Task.js" />

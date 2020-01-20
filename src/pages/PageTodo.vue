@@ -3,6 +3,7 @@
 
     <div class="row q-mb-lg">
       <Search />
+      <Sort />
     </div>
 
     <q-banner v-if="!has(tasksTodo) && search" class="bg-grey-3 q-mb-lg">
@@ -56,9 +57,9 @@
   </q-page>
 </template>
 
-<script src="./PageTodo.js">
+<script src="./PageTodo.js" />
 
 <style lang="stylus">
-  .text-strikethrough
-    text-decoration: line-through;
+.text-strikethrough
+    text-decoration line-through
 </style>

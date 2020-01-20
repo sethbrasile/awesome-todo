@@ -15,5 +15,9 @@ export default {
 
   setSearch(state, value) {
     state.search = value.toLowerCase();
+  },
+
+  setSort(state, value) {
+    state.sort = value;
   }
 }

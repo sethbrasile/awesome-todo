@@ -23,4 +23,4 @@
   </q-card>
 </template>
 
-<script src="./EditTask">
+<script src="./EditTask" />

@@ -24,4 +24,4 @@
   </q-card>
 </template>
 
-<script src="./AddTask.js">
+<script src="./AddTask.js" />

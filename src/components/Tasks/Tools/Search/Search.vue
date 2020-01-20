@@ -12,4 +12,4 @@
   </q-input>
 </template>
 
-<script src="./Search.js">
+<script src="./Search.js" />

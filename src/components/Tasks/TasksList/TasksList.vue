@@ -20,4 +20,4 @@
   </div>
 </template>
 
-<script src="./TaskList.js">
+<script src="./TaskList.js" />
