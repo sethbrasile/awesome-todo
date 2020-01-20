@@ -1,5 +1,6 @@
 export default {
   settings: {
-    twelveHourTime: false
+    twelveHourTime: false,
+    tasksOneList: true
   }
 }

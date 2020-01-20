@@ -11,10 +11,19 @@ export default {
       set(value) {
         this.setTwelveHourTime(value);
       }
+    },
+
+    tasksOneList: {
+      get() {
+        return this.settings.tasksOneList;
+      },
+      set(value) {
+        this.setTasksOneList(value);
+      }
     }
   },
 
   methods: {
-    ...mapActions('settings', ['setTwelveHourTime'])
+    ...mapActions('settings', ['setTwelveHourTime', 'setTasksOneList'])
   }
 }

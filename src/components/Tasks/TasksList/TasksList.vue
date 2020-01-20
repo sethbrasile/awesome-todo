@@ -4,8 +4,9 @@
     enter-active-class="animated zoomIn"
     leave-active-class="animated zoomOut absolute-top"
   >
-    <div class="q-mb-lg">
+    <div :class="{ 'q-mb-lg' : !settings.tasksOneList }">
       <q-banner
+        v-if="!settings.tasksOneList"
         :class="bgColor"
         class="text-white text-center"
       >
