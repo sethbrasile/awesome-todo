@@ -1,4 +1,5 @@
 import { mapState, mapActions } from 'vuex';
+import selectAll from 'src/directives/select-all.js'
 
 export default {
   computed: {
@@ -16,5 +17,9 @@ export default {
 
   methods: {
     ...mapActions('tasks', ['setSearch'])
+  },
+
+  directives: {
+    selectAll
   }
 }

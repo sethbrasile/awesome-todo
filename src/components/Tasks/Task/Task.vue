@@ -2,6 +2,7 @@
   <q-item
     :class="task.completed ? 'bg-green-1' : 'bg-red-1'"
     @click="toggleCompleted"
+    v-touch-hold:400.mouse="showEditTaskModal"
     clickable
     v-ripple>
 
@@ -34,7 +35,7 @@
             class="row justify-end"
             caption
           >
-            {{task.dueDate}}
+            {{task.dueDate | niceDate}}
           </q-item-label>
           <q-item-label
             class="row justify-end"
@@ -49,7 +50,7 @@
     <q-item-section side>
       <div class="row">
         <q-btn
-          @click.stop="showEditTask = true"
+          @click.stop="showEditTaskModal"
           flat
           round
           dense

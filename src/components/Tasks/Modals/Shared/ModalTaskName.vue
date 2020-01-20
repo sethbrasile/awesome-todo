@@ -7,6 +7,7 @@
       ref="name"
       :value="name"
       :rules="[val => !!val || 'Task Name is required']"
+      v-select-all
       outlined
       autofocus
     >
@@ -23,7 +24,13 @@
 </template>
 
 <script>
-export default {
-  props: ['name']
-}
+  import selectAll from 'src/directives/select-all.js';
+
+  export default {
+    props: ['name'],
+
+    directives: {
+      selectAll
+    }
+  }
 </script>

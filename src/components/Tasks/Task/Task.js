@@ -1,5 +1,8 @@
 import { mapActions } from 'vuex';
+import { date } from 'quasar';
 import EditTask from 'components/Tasks/Modals/EditTask/EditTask.vue'
+
+const { formatDate } = date;
 
 export default {
   props: ['task', 'id'],
@@ -22,6 +25,9 @@ export default {
     },
     toggleCompleted() {
       this.updateTask({ id: this.id, updates: { completed: !this.task.completed } })
+    },
+    showEditTaskModal() {
+      this.showEditTask = true;
     }
   },
   computed: {
@@ -32,6 +38,11 @@ export default {
       set() {
         this.toggleCompleted();
       }
+    }
+  },
+  filters: {
+    niceDate(value) {
+      return formatDate(value, 'MMM D');
     }
   },
   components: {
