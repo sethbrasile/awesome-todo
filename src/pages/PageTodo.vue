@@ -6,40 +6,50 @@
       <Sort />
     </div>
 
-    <q-banner v-if="!has(tasksTodo) && search" class="bg-grey-3 q-mb-lg">
-      <template v-slot:avatar>
-        <q-icon name="close" color="negative" />
-      </template>
-      No Results!
-    </q-banner>
+    <div class="relative-position">
+      <transition
+        appear
+        enter-active-class="animated zoomIn"
+        leave-active-class="animated zoomOut absolute-top"
+      >
+        <q-banner v-if="!has(tasksTodo) && search" class="bg-grey-3 q-mb-lg">
+          <template v-slot:avatar>
+            <q-icon name="close" color="negative" />
+          </template>
+          No Results!
+        </q-banner>
 
-    <q-banner v-if="!has(tasksTodo) && !search" class="bg-grey-3 q-mb-lg">
-      <template v-slot:avatar>
-        <q-icon name="check" color="primary" />
-      </template>
-      You have nothing to do! Go watch some TV!
-      <template v-slot:action>
-        <q-btn
-          @click="showAddTask = !showAddTask"
-          color="primary"
-          label="Add task"
+        <q-banner v-if="!has(tasksTodo) && !search" class="bg-grey-3 q-mb-lg">
+          <template v-slot:avatar>
+            <q-icon name="check" color="primary" />
+          </template>
+          You have nothing to do! Go watch some TV!
+          <template v-slot:action>
+            <q-btn
+              @click="showAddTask = !showAddTask"
+              color="primary"
+              label="Add task"
+            />
+          </template>
+        </q-banner>
+      </transition>
+
+      <TasksList
+        v-if="has(tasksTodo)"
+        :tasks="tasksTodo"
+        headerText="Todo"
+        bgColor="bg-negative"
+      />
+
+      <div class="relative-position">
+        <TasksList
+          v-if="has(tasksCompleted)"
+          :tasks="tasksCompleted"
+          headerText="Completed"
+          bgColor="bg-primary"
         />
-      </template>
-    </q-banner>
-
-    <TasksList
-      v-if="has(tasksTodo)"
-      :tasks="tasksTodo"
-      headerText="Todo"
-      bgColor="bg-negative"
-    />
-
-    <TasksList
-      v-if="has(tasksCompleted)"
-      :tasks="tasksCompleted"
-      headerText="Completed"
-      bgColor="bg-primary"
-    />
+      </div>
+    </div>
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
