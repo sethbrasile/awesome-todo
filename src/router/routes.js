@@ -9,8 +9,12 @@ const routes = [
         component: () => import('pages/TodoList/TodoList.vue')
       },
       {
-      path: '/settings',
-      component: () => import('pages/Settings/Settings.vue')
+        path: '/auth',
+        component: () => import('pages/Auth/Auth.vue')
+      },
+      {
+        path: '/settings',
+        component: () => import('pages/Settings/Settings.vue')
       },
       {
         path: '/settings/help',
