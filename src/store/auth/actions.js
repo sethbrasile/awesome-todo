@@ -23,12 +23,13 @@ export default {
       .finally(() => Loading.hide())
   },
 
-  handleAuthStateChange({ commit }) {
+  handleAuthStateChange({ commit, dispatch }) {
     firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         commit('setLoggedIn', true);
         LocalStorage.set('loggedIn', true);
         this.$router.push('/').catch(() => {});
+        dispatch('tasks/fbReadData', null, { root: true });
       } else {
         commit('setLoggedIn', false);
         LocalStorage.set('loggedIn', false);
