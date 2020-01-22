@@ -1,23 +1,26 @@
-import { LocalStorage } from 'quasar';
+import { LocalStorage, Loading } from 'quasar';
 import { firebaseAuth } from 'boot/firebase';
+import showErrorMessage from 'src/utils/show-error-message';
 
 export default {
   registerUser(_, { email, password }) {
+    Loading.show();
     firebaseAuth.createUserWithEmailAndPassword(email, password)
-      .then(res => console.log(res))
-      .catch(err => console.error(err.message));
+      .catch(showErrorMessage)
+      .finally(() => Loading.hide())
   },
 
   loginUser(_, { email, password }) {
+    Loading.show();
     firebaseAuth.signInWithEmailAndPassword(email, password)
-      .then(res => console.log(res))
-      .catch(err => console.error(err.message));
+      .catch(showErrorMessage)
+      .finally(() => Loading.hide())
   },
 
   logoutUser() {
     firebaseAuth.signOut()
-      .then(res => console.log(res))
-      .catch(err => console.error(err.message));
+      .catch(showErrorMessage)
+      .finally(() => Loading.hide())
   },
 
   handleAuthStateChange({ commit }) {
