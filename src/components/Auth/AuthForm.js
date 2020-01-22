@@ -1,3 +1,5 @@
+import { mapActions } from 'vuex';
+
 export default {
   props: ['tab'],
 
@@ -11,6 +13,8 @@ export default {
   },
 
   methods: {
+    ...mapActions('auth', ['registerUser', 'loginUser']),
+
     submitForm() {
       this.$refs.email.validate();
       this.$refs.password.validate();
@@ -20,9 +24,9 @@ export default {
 
       if (!emailError && !passwordError) {
         if  (this.tab === 'login') {
-          console.log('login');
+          this.loginUser(this.formData);
         } else {
-          console.log('register');
+          this.registerUser(this.formData);
         }
       }
     },
