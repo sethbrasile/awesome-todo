@@ -2,18 +2,18 @@ import { uid } from 'quasar';
 import { firebaseDB, firebaseAuth } from 'boot/firebase';
 
 export default {
-  updateTask({ commit }, payload) {
-    commit('updateTask', payload)
+  updateTask({ dispatch }, payload) {
+    dispatch('fbUpdateTask', payload);
   },
 
-  deleteTask({ commit }, id) {
-    commit('deleteTask', id);
+  deleteTask({ dispatch }, id) {
+    dispatch('fbDeleteTask', id);
   },
 
-  addTask({ commit }, task) {
+  addTask({ dispatch }, task) {
     let id = uid();
     let payload = { id, task };
-    commit('addTask', payload);
+    dispatch('fbAddTask', payload);
   },
 
   setSearch({ commit }, value) {
@@ -48,5 +48,28 @@ export default {
       let id = snapshot.key;
       commit('deleteTask', id);
     });
+  },
+
+  fbAddTask(_, payload) {
+    let uid = firebaseAuth.currentUser.uid;
+    let taskId = payload.id;
+    let ref = firebaseDB.ref(`tasks/${uid}/${taskId}`);
+
+    ref.set(payload.task);
+  },
+
+  fbUpdateTask(_, payload) {
+    let uid = firebaseAuth.currentUser.uid;
+    let taskId = payload.id;
+    let ref = firebaseDB.ref(`tasks/${uid}/${taskId}`);
+
+    ref.update(payload.updates);
+  },
+
+  fbDeleteTask(_, id) {
+    let uid = firebaseAuth.currentUser.uid;
+    let ref = firebaseDB.ref(`tasks/${uid}/${id}`);
+
+    ref.remove();
   }
 }
