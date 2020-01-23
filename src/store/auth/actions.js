@@ -17,10 +17,13 @@ export default {
       .finally(() => Loading.hide())
   },
 
-  logoutUser() {
+  logoutUser({ dispatch }) {
     firebaseAuth.signOut()
       .catch(showErrorMessage)
-      .finally(() => Loading.hide())
+      .finally(() => {
+        Loading.hide();
+        dispatch('tasks/setTasksLoaded',  false, { root: true });
+      });
   },
 
   handleAuthStateChange({ commit, dispatch }) {

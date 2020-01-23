@@ -24,9 +24,15 @@ export default {
     commit('setSort', value);
   },
 
+  setTasksLoaded({ commit }, value) {
+    commit('setTasksLoaded', value);
+  },
+
   fbReadData({ commit }) {
     let uid = firebaseAuth.currentUser.uid;
     let data = firebaseDB.ref(`tasks/${uid}`);
+
+    data.once('value', () => commit('setTasksLoaded', true));
 
     data.on('child_added', (snapshot) => {
       let task = snapshot.val();

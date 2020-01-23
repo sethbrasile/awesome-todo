@@ -19,5 +19,9 @@ export default {
 
   setSort(state, value) {
     state.sort = value;
+  },
+
+  setTasksLoaded(state, value) {
+    state.tasksLoaded = value;
   }
 }

@@ -1,6 +1,7 @@
 export default {
   search: '',
   sort: 'name',
+  tasksLoaded: false,
   tasks: {
     // 'ID1': {
     //   name: 'Go to shop',

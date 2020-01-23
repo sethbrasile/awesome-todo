@@ -11,7 +11,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('tasks', ['search']),
+    ...mapState('tasks', ['search', 'tasksLoaded']),
     ...mapGetters('tasks', ['tasksTodo', 'tasksCompleted'])
   },
   methods: {
