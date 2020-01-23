@@ -32,9 +32,9 @@ export default {
         dispatch('tasks/fbReadData', null, { root: true });
       } else {
         commit('setLoggedIn', false);
+        dispatch('tasks/clearState', null, { root: true });
         LocalStorage.set('loggedIn', false);
         this.$router.replace('/auth').catch(() => {});
-        dispatch('tasks/clearState', null, { root: true });
       }
     });
   }
