@@ -17,13 +17,10 @@ export default {
       .finally(() => Loading.hide())
   },
 
-  logoutUser({ dispatch }) {
+  logoutUser() {
     firebaseAuth.signOut()
       .catch(showErrorMessage)
-      .finally(() => {
-        Loading.hide();
-        dispatch('tasks/setTasksLoaded',  false, { root: true });
-      });
+      .finally(() => Loading.hide());
   },
 
   handleAuthStateChange({ commit, dispatch }) {
@@ -37,6 +34,7 @@ export default {
         commit('setLoggedIn', false);
         LocalStorage.set('loggedIn', false);
         this.$router.replace('/auth').catch(() => {});
+        dispatch('tasks/clearState', null, { root: true });
       }
     });
   }

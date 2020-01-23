@@ -24,8 +24,11 @@ export default {
     commit('setSort', value);
   },
 
-  setTasksLoaded({ commit }, value) {
-    commit('setTasksLoaded', value);
+  clearState({ commit }) {
+    commit('clearTasks');
+    commit('setSort', 'name');
+    commit('setSearch', '');
+    commit('setTasksLoaded', false);
   },
 
   fbReadData({ commit }) {

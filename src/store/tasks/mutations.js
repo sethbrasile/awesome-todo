@@ -9,6 +9,10 @@ export default {
     Vue.delete(state.tasks, id);
   },
 
+  clearTasks(state) {
+    state.tasks = {};
+  },
+
   addTask(state, payload) {
     Vue.set(state.tasks, payload.id, payload.task);
   },
