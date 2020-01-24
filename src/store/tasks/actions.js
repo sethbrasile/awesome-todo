@@ -1,5 +1,6 @@
-import { uid } from 'quasar';
+import { uid, Notify } from 'quasar';
 import { firebaseDB, firebaseAuth } from 'boot/firebase';
+import showErrorMessage from 'src/utils/show-error-message';
 
 export default {
   updateTask({ dispatch }, payload) {
@@ -64,7 +65,13 @@ export default {
     let taskId = payload.id;
     let ref = firebaseDB.ref(`tasks/${uid}/${taskId}`);
 
-    ref.set(payload.task);
+    ref.set(payload.task, (error) => {
+      if (error) {
+        showErrorMessage(error);
+      } else {
+        Notify.create('Task added!');
+      }
+    });
   },
 
   fbUpdateTask(_, payload) {
@@ -72,13 +79,28 @@ export default {
     let taskId = payload.id;
     let ref = firebaseDB.ref(`tasks/${uid}/${taskId}`);
 
-    ref.update(payload.updates);
+    ref.update(payload.updates, (error) => {
+      if (error) {
+        showErrorMessage(error);
+      } else {
+        let keys = Object.keys(payload.updates);
+        if (keys.includes('completed') && keys.length > 1) {
+          Notify.create('Task updated!');
+        }
+      }
+    });
   },
 
   fbDeleteTask(_, id) {
     let uid = firebaseAuth.currentUser.uid;
     let ref = firebaseDB.ref(`tasks/${uid}/${id}`);
 
-    ref.remove();
+    ref.remove((error) => {
+      if (error) {
+        showErrorMessage(error);
+      } else {
+        Notify.create('Task removed!');
+      }
+    });
   }
 }
