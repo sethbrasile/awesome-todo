@@ -1,4 +1,4 @@
-import { app, BrowserWindow, nativeTheme, Menu } from 'electron'
+import { app, BrowserWindow, nativeTheme, Menu, ipcMain } from 'electron'
 import menuTemplate from './electron-main-menu-template';
 
 let mainWindow;
@@ -49,9 +49,7 @@ function createWindow () {
 }
 
 app.on('ready', createWindow)
-
-app.on('window-all-closed', () => {
-  app.quit()
-})
+app.on('window-all-closed', app.quit);
+ipcMain.on('quit-app', app.quit);
 
 export { mainWindow };
