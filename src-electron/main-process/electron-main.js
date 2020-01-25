@@ -1,4 +1,9 @@
-import { app, BrowserWindow, nativeTheme } from 'electron'
+import { app, BrowserWindow, nativeTheme, Menu } from 'electron'
+import menuTemplate from './electron-main-menu-template';
+
+let mainWindow;
+
+Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
@@ -14,7 +19,7 @@ if (process.env.PROD) {
   global.__statics = require('path').join(__dirname, 'statics').replace(/\\/g, '\\\\')
 }
 
-let mainWindow
+
 
 function createWindow () {
   /**
@@ -23,6 +28,8 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
+    minWidth: 800,
+    minHeight: 500,
     useContentSize: true,
     webPreferences: {
       // Change from /quasar.conf.js > electron > nodeIntegration;
@@ -44,13 +51,7 @@ function createWindow () {
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  app.quit()
 })
 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
-})
+export { mainWindow };

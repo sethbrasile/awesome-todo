@@ -84,6 +84,7 @@ export default {
         showErrorMessage(error);
       } else {
         let keys = Object.keys(payload.updates);
+
         if (keys.includes('completed') && keys.length > 1) {
           Notify.create('Task updated!');
         }
