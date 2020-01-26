@@ -30,6 +30,14 @@ export default [
   {
     label: 'File',
     submenu: [
+      isMac ? null : {
+        label: 'Settings',
+        accelerator: 'CmdOrCtrl+,',
+        click() {
+          mainWindow.webContents.send('show-settings');
+        }
+      },
+      isMac ? null : { type: 'separator' },
       isMac ? { role: 'close' } : { role: 'quit' }
     ]
   },
